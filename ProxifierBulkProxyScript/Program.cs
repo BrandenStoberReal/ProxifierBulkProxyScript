@@ -4,6 +4,7 @@ using System.Xml;
 XmlDocument configDocument = new XmlDocument();
 string configDocumentPath;
 string proxiesList = null;
+string proxyType = "SOCKS5";
 
 while (true)
 {
@@ -36,6 +37,9 @@ while (true)
     }
 }
 
+Console.Write("Please input the proxy type (SOCKS5/SOCKS4/HTTP): ");
+proxyType = Console.ReadLine();
+
 XmlNode proxyNodeContainer = configDocument.SelectSingleNode("/ProxifierProfile/ProxyList");
 
 if (proxyNodeContainer != null)
@@ -66,7 +70,7 @@ if (proxyNodeContainer != null)
         XmlElement proxyAddressNode = configDocument.CreateElement("Address");
 
         newProxyIDAttr.Value = (lastID + 1).ToString();
-        newProxyTypeAttr.Value = "SOCKS5";
+        newProxyTypeAttr.Value = proxyType;
 
         proxyOptionsNode.InnerText = "48";
         proxyPortNode.InnerText = ipAndPort[1];
