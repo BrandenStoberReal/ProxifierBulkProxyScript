@@ -25,8 +25,8 @@ while (true)
 while (true)
 {
     Console.Write("Please input path to formatted proxies file (ip:port): ");
-    string inputFile = Console.ReadLine();
-    if (File.Exists(inputFile))
+    string? inputFile = Console.ReadLine();
+    if (inputFile != null & File.Exists(inputFile))
     {
         proxiesList = File.ReadAllText(inputFile);
         break;
@@ -40,7 +40,7 @@ while (true)
 Console.Write("Please input the proxy type (SOCKS5/SOCKS4/HTTP): ");
 proxyType = Console.ReadLine();
 
-XmlNode proxyNodeContainer = configDocument.SelectSingleNode("/ProxifierProfile/ProxyList");
+XmlNode? proxyNodeContainer = configDocument.SelectSingleNode("/ProxifierProfile/ProxyList");
 
 if (proxyNodeContainer != null)
 {
